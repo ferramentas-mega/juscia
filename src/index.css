@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Juscia design tokens */
+  --color-juscia-primary: hsl(220 100% 43%);
+  --color-juscia-primary-hover: hsl(220 100% 39%);
+  --color-juscia-primary-light: hsl(220 100% 60%);
+  --color-juscia-ink: hsl(225 35% 15%);
+  --color-juscia-muted: hsl(214 10% 45%);
+  --color-juscia-border: hsl(214 20% 90%);
+  --color-juscia-surface: hsl(214 25% 96%);
+  --color-juscia-badge-bg: #e9f2ff;
+  --color-juscia-badge-fg: #272d41;
+  --color-juscia-whatsapp: hsl(142 76% 36%);
+  --color-juscia-whatsapp-hover: hsl(142 76% 31%);
+
+  --animate-marquee-x: mpScrollX 34s linear infinite;
+  --animate-marquee-x-slow: mpScrollX 40s linear infinite;
+  --animate-marquee-y-a: mpScrollY 15s linear infinite;
+  --animate-marquee-y-b: mpScrollY 19s linear infinite;
+  --animate-marquee-y-c: mpScrollY 17s linear infinite;
+  --animate-sheen: mpSheen 5s ease-in-out infinite;
+  --animate-breathe: jsBreathe 8s ease-in-out infinite alternate;
+  --animate-twinkle: jsTwinkle 3s ease-in-out infinite;
+}
+
+@keyframes mpScrollX {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes mpScrollY {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes mpSheen {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+@keyframes mpReveal {
+  from { filter: blur(10px); transform: translateY(-20px); opacity: 0; }
+  to { filter: blur(0); transform: none; opacity: 1; }
+}
+@keyframes jsBreathe {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+@keyframes jsTwinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.65; }
+}
+@keyframes jsPriceIn {
+  from { transform: translateY(10px); opacity: 0.35; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes jsModalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes jsFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-juscia-ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reveal-animate {
+  animation: mpReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.price-pulse {
+  animation: jsPriceIn 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
