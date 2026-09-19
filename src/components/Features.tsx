@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { tabsRaw } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { LazyVideo } from "@/components/ui/LazyVideo";
 
 export function Features() {
   const [active, setActive] = useState(0);
@@ -61,10 +62,9 @@ export function Features() {
             </div>
             <div className="flex aspect-16/10 w-full items-center justify-center overflow-hidden rounded-xl bg-white/50">
               {tab.video ? (
-                <video
+                <LazyVideo
                   key={tab.video}
                   src={tab.video}
-                  autoPlay
                   muted
                   loop
                   playsInline

@@ -1,11 +1,12 @@
 import { steps, type TimelineMedia } from "@/lib/content";
 import { useTimelineProgress } from "@/hooks/useTimelineProgress";
+import { LazyVideo } from "@/components/ui/LazyVideo";
 
 function MediaTile({ media }: { media: TimelineMedia }) {
   const box =
     "block h-60 w-full rounded-lg border border-juscia-border object-cover shadow-[0_10px_15px_-3px_hsl(220_100%_43%_/_0.1)]";
   if (media.type === "video") {
-    return <video src={media.src} autoPlay muted loop playsInline className={box} />;
+    return <LazyVideo src={media.src!} muted loop playsInline className={box} />;
   }
   if (media.type === "qr") {
     return (
