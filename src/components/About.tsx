@@ -5,7 +5,7 @@ export function About() {
         <div className="flex flex-col items-center justify-center gap-10 lg:flex-row">
           <div className="relative flex-shrink-0 overflow-hidden rounded-2xl shadow-[0_25px_50px_-12px_hsl(220_100%_43%_/_0.4)]">
             <img
-              src="/assets/about.png"
+              src="/assets/about.webp"
               alt="Escritório de advocacia"
               className="block w-full max-w-md object-cover"
             />
