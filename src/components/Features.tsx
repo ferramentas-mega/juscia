@@ -1,87 +1,74 @@
-import { useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { tabsRaw } from "@/lib/content";
-import { cn } from "@/lib/utils";
-import { LazyVideo } from "@/components/ui/LazyVideo";
+import { Bot, Clock, TrendingUp, Shield, Zap, Users } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
-export function Features() {
-  const [active, setActive] = useState(0);
-  const tab = tabsRaw[active];
+const Features = () => {
+  const features = [
+    {
+      icon: Bot,
+      title: "IA Avançada",
+      description: "Inteligência artificial treinada especificamente para atendimento jurídico, compreendendo contextos complexos.",
+    },
+    {
+      icon: Clock,
+      title: "Atendimento 24/7",
+      description: "Seus clientes recebem respostas imediatas a qualquer hora do dia, sem precisar esperar.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Mais Conversões",
+      description: "Capture leads qualificados automaticamente e aumente suas taxas de conversão em até 3x.",
+    },
+    {
+      icon: Shield,
+      title: "Segurança Garantida",
+      description: "Todos os dados são criptografados e protegidos conforme a LGPD e normas da OAB.",
+    },
+    {
+      icon: Zap,
+      title: "Integração Simples",
+      description: "Configure em minutos e integre facilmente com seu WhatsApp Business existente.",
+    },
+    {
+      icon: Users,
+      title: "Qualificação Inteligente",
+      description: "A IA qualifica automaticamente os leads, priorizando casos com maior potencial.",
+    },
+  ];
 
   return (
-    <section id="funcionalidades" className="scroll-mt-[100px] py-24 md:py-32">
-      <div className="mx-auto max-w-[1280px] px-4">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <span className="inline-flex items-center rounded-full border border-juscia-border px-3 py-0.5 text-xs font-semibold text-juscia-ink">
-            Funcionalidades
-          </span>
-          <h2 className="max-w-xl text-3xl font-semibold tracking-[-0.02em] text-juscia-ink">
-            Funcionalidades da plataforma de IA jurídica
+    <section id="vantagens" className="py-24 bg-muted/30">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Vantagens que transformam
+            <span className="block text-primary mt-2">seu escritório</span>
           </h2>
-          <p className="text-juscia-muted">
-            Chat ao vivo, CRM jurídico, geração de documentos e gestão de contatos em um só lugar.
+          <p className="text-xl text-muted-foreground">
+            Tecnologia de ponta para automatizar seu atendimento e escalar seus resultados
           </p>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-10">
-          {tabsRaw.map((t, i) => {
-            const isActive = i === active;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
             return (
-              <button
-                key={t.label}
-                onClick={() => setActive(i)}
-                className={cn(
-                  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-semibold transition-all",
-                  isActive ? "bg-juscia-surface text-juscia-primary" : "text-juscia-muted",
-                )}
+              <Card
+                key={index}
+                className="p-8 border-2 hover:border-primary transition-all duration-300 hover:shadow-elevated group animate-fade-in bg-card"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <t.icon size={22} />
-                <span>{t.label}</span>
-              </button>
+                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                  <Icon className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-card-foreground">{feature.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+              </Card>
             );
           })}
-        </div>
-
-        <div className="mx-auto mt-8 max-w-[1280px] rounded-2xl bg-juscia-surface/70 p-6 sm:p-10 md:p-16">
-          <div className="grid grid-cols-1 place-items-center gap-10 md:grid-cols-2">
-            <div className="flex w-full flex-col gap-5">
-              <span className="w-fit rounded-full border border-juscia-border bg-white px-3 py-0.5 text-xs font-semibold text-juscia-ink">
-                {tab.badge}
-              </span>
-              <h3 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-juscia-ink md:text-[48px]">
-                {tab.title}
-              </h3>
-              <p className="text-lg leading-relaxed text-juscia-muted">{tab.description}</p>
-              <a
-                href="#planos"
-                className="mt-2.5 inline-flex w-fit items-center gap-2 rounded-md bg-juscia-primary px-8 py-0 text-sm font-medium text-white transition-colors hover:bg-juscia-primary-hover"
-                style={{ height: 44 }}
-              >
-                {tab.buttonText} <ArrowRight size={16} />
-              </a>
-            </div>
-            <div className="flex aspect-16/10 w-full items-center justify-center overflow-hidden rounded-xl bg-white/50">
-              {tab.video ? (
-                <LazyVideo
-                  key={tab.video}
-                  src={tab.video}
-                  muted
-                  loop
-                  playsInline
-                  className="block h-full w-full rounded-xl object-cover"
-                />
-              ) : (
-                <img
-                  key={tab.img}
-                  src={tab.img}
-                  alt={tab.label}
-                  className="block h-full w-full rounded-xl object-cover"
-                />
-              )}
-            </div>
-          </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Features;

@@ -1,48 +1,73 @@
-# Juscia — Landing Page
+# Welcome to your Lovable project
 
-Landing page de conversão da Juscia, plataforma de IA que atende, qualifica e
-resume casos de clientes de escritórios de advocacia diretamente no WhatsApp.
+## Project info
 
-Portado a partir do handoff de design (`Juscia Site.dc.html`) para um app de
-produção com **React + TypeScript + Vite + Tailwind CSS v4**, seguindo os
-tokens de design, a copy e os comportamentos especificados no handoff.
+**URL**: https://lovable.dev/projects/d24acdae-f56f-49a1-99b7-d7bc995338a3
 
-## Stack
+## How can I edit this code?
 
-- React 19 + TypeScript
-- Vite 8 (com `@tailwindcss/vite`)
-- Tailwind CSS v4 (tokens de design em `src/index.css` via `@theme`)
-- [lucide-react](https://lucide.dev/) para ícones
+There are several ways of editing your application.
 
-## Estrutura
+**Use Lovable**
 
-```
-src/
-  components/       # As 17 seções da landing page + modal de cadastro
-    ui/             # Primitivos (Badge, Sparkline)
-  hooks/            # Efeitos de scroll/parallax/reveal replicados do protótipo
-  lib/
-    content.ts      # Toda a copy e os dados (planos, FAQ, depoimentos, etc.)
-    utils.ts        # Helper `cn` (clsx + tailwind-merge)
-public/
-  assets/           # Imagens do handoff (logo, dashboard, about)
-  videos/           # Vídeos .webm do handoff
-```
+Simply visit the [Lovable Project](https://lovable.dev/projects/d24acdae-f56f-49a1-99b7-d7bc995338a3) and start prompting.
 
-## Rodando localmente
+Changes made via Lovable will be committed automatically to this repo.
 
-```bash
-npm install
-npm run dev       # ambiente de desenvolvimento
-npm run build     # build de produção em dist/
-npm run preview   # serve o build de produção
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
-## Notas
+**Edit a file directly in GitHub**
 
-- `assets/mega-logo.png` foi preservado no pacote de design mas **não é usado**
-  no site (marca legada, conforme o handoff).
-- Todos os CTAs apontam para o WhatsApp
-  (`https://api.whatsapp.com/send?phone=554892254344`) ou âncoras internas.
-- SEO (title, meta tags, Open Graph, Twitter Card e JSON-LD com
-  Organization/SoftwareApplication/FAQPage) está em `index.html`.
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
+
+**Use GitHub Codespaces**
+
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
+
+## What technologies are used for this project?
+
+This project is built with:
+
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
+
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/d24acdae-f56f-49a1-99b7-d7bc995338a3) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

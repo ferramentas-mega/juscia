@@ -1,91 +1,88 @@
-import { steps, type TimelineMedia } from "@/lib/content";
-import { useTimelineProgress } from "@/hooks/useTimelineProgress";
-import { LazyVideo } from "@/components/ui/LazyVideo";
+import { Smartphone, MessageCircle, Target, CheckCircle } from "lucide-react";
 
-function MediaTile({ media }: { media: TimelineMedia }) {
-  const box =
-    "block h-60 w-full rounded-lg border border-juscia-border object-cover shadow-[0_10px_15px_-3px_hsl(220_100%_43%_/_0.1)]";
-  if (media.type === "video") {
-    return <LazyVideo src={media.src!} muted loop playsInline className={box} />;
-  }
-  if (media.type === "qr") {
-    return (
-      <div className={`${box} flex flex-col items-center justify-center gap-3.5 bg-white`}>
-        <div
-          className="h-24 w-24 rounded-lg border-[6px] border-white outline outline-2 outline-[hsl(214_20%_88%)]"
-          style={{
-            background: "repeating-conic-gradient(hsl(225 35% 15%) 0 25%, #fff 0 50%) 0 0/16px 16px",
-          }}
-        />
-        <span className="text-[13px] font-semibold text-juscia-muted">Leia com o WhatsApp</span>
-      </div>
-    );
-  }
-  return <img src={media.src} alt={media.alt} className={box} />;
-}
-
-export function HowItWorks() {
-  const { trackRef, progressRef } = useTimelineProgress();
+const HowItWorks = () => {
+  const steps = [
+    {
+      icon: Smartphone,
+      number: "01",
+      title: "Cliente entra em contato",
+      description: "Seu cliente inicia uma conversa pelo WhatsApp do escritório, a qualquer hora do dia.",
+    },
+    {
+      icon: MessageCircle,
+      number: "02",
+      title: "IA compreende e responde",
+      description: "Nossa inteligência artificial entende o caso, faz perguntas relevantes e coleta informações importantes.",
+    },
+    {
+      icon: Target,
+      number: "03",
+      title: "Qualificação automática",
+      description: "O sistema qualifica automaticamente o lead, identificando o potencial e a urgência do caso.",
+    },
+    {
+      icon: CheckCircle,
+      number: "04",
+      title: "Você recebe leads prontos",
+      description: "Receba notificações com leads qualificados direto no seu CRM, prontos para o primeiro atendimento.",
+    },
+  ];
 
   return (
-    <section id="como-funciona" className="w-full scroll-mt-[100px]">
-      <div className="w-full bg-white px-4 sm:px-10">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-center px-4 py-20 sm:px-10">
-          <h2 className="mb-4 max-w-3xl text-center text-3xl font-bold tracking-[-0.02em] text-juscia-primary">
-            Como funciona a Juscia
+    <section id="como-funciona" className="py-24 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Como funciona
+            <span className="block text-primary mt-2">a Juscia</span>
           </h2>
-          <p className="max-w-md text-center text-sm text-juscia-muted">
-            Conheça a jornada de transformação do atendimento jurídico com inteligência artificial.
+          <p className="text-xl text-muted-foreground">
+            Processo simples e automatizado em 4 etapas
           </p>
         </div>
-        <div ref={trackRef} className="relative mx-auto max-w-[1280px] overflow-hidden pb-20">
-          {steps.map((st) => (
-            <div key={st.title} className="flex justify-start gap-6 pt-32 sm:gap-10 md:pt-40">
-              <div className="sticky top-32 z-40 flex w-full max-w-xs flex-shrink-0 flex-row items-center self-start md:top-40">
-                <div className="absolute left-3 flex h-10 w-10 items-center justify-center rounded-full bg-white">
-                  <div className="h-4 w-4 rounded-full border border-juscia-border bg-juscia-surface" />
+
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={index}
+                  className="relative animate-fade-in"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  {/* Connector line (hidden on mobile and last item) */}
+                  {index < steps.length - 1 && (
+                    <div className="hidden lg:block absolute top-16 left-[60%] w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary/20" />
+                  )}
+
+                  <div className="relative text-center">
+                    {/* Number badge */}
+                    <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full text-primary font-bold text-sm">
+                      {step.number}
+                    </div>
+
+                    {/* Icon */}
+                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-soft">
+                      <Icon className="w-10 h-10 text-primary-foreground" />
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-xl font-bold mb-3 text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="pl-20 text-3xl font-bold text-juscia-muted md:text-[48px]">
-                  {st.title}
-                </h3>
-              </div>
-              <div className="relative w-full px-4">
-                <p className="mb-3 text-2xl font-bold text-juscia-primary sm:text-[30px]">
-                  {st.heading}
-                </p>
-                <p className="mb-8 max-w-xl text-[15px] leading-relaxed text-juscia-muted">
-                  {st.desc}
-                </p>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {st.media.map((m, i) => (
-                    <MediaTile key={i} media={m} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-          <div
-            className="absolute left-8 top-0 h-full w-0.5 overflow-hidden"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, hsl(214 20% 90%) 20%, hsl(214 20% 90%) 80%, transparent 99%)",
-              maskImage:
-                "linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to bottom,transparent 0%,#000 10%,#000 90%,transparent 100%)",
-            }}
-          >
-            <div
-              ref={progressRef}
-              className="absolute inset-x-0 top-0 h-0 w-0.5 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(to top, hsl(258 90% 66%) 0%, hsl(220 100% 50%) 10%, transparent 100%)",
-              }}
-            />
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default HowItWorks;

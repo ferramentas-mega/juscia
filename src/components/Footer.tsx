@@ -1,181 +1,81 @@
-import { ArrowUp } from "lucide-react";
-import { footerPrimary, footerSecondary, footerSocial, marqueeLabels } from "@/lib/content";
-import { useFooterScroll } from "@/hooks/useFooterScroll";
-import { useMagnetic } from "@/hooks/useMagnetic";
+import { MessageSquare } from "lucide-react";
 
-const glassPill =
-  "border border-juscia-primary/22 bg-gradient-to-br from-juscia-primary/10 to-white/60 shadow-[0_12px_30px_-10px_hsl(220_100%_43%_/_0.3),inset_0_1px_1px_#fff] backdrop-blur-md no-underline transition-[background,border-color,box-shadow] duration-[400ms]";
-
-function MagneticLink({ children, className, ...rest }: React.ComponentProps<"a">) {
-  const { ref, onMouseMove, onMouseLeave } = useMagnetic<HTMLAnchorElement>();
-  return (
-    <a ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className={className} {...rest}>
-      {children}
-    </a>
-  );
-}
-
-function MagneticButton({ children, className, ...rest }: React.ComponentProps<"button">) {
-  const { ref, onMouseMove, onMouseLeave } = useMagnetic<HTMLButtonElement>();
-  return (
-    <button
-      ref={ref}
-      onMouseMove={onMouseMove as unknown as React.MouseEventHandler<HTMLButtonElement>}
-      onMouseLeave={onMouseLeave as unknown as React.MouseEventHandler<HTMLButtonElement>}
-      className={className}
-      {...rest}
-    >
-      {children}
-    </button>
-  );
-}
-
-const marqueeItems = marqueeLabels.concat(marqueeLabels);
-
-export function Footer() {
-  const { wrapRef, giantRef, headingRef, linksRef } = useFooterScroll();
+const Footer = () => {
+  const footerLinks = {
+    Produto: ["Funcionalidades", "Integrações", "Preços", "FAQ"],
+    Empresa: ["Sobre", "Blog", "Carreiras", "Contato"],
+    Legal: ["Privacidade", "Termos de Uso", "LGPD", "Cookies"],
+    Suporte: ["Central de Ajuda", "Documentação", "Status", "API"],
+  };
 
   return (
-    <section
-      id="contato"
-      ref={wrapRef}
-      className="relative h-screen min-h-[720px] w-full scroll-mt-[100px] overflow-hidden"
-    >
-      <footer className="absolute inset-0 flex flex-col justify-between overflow-hidden bg-white text-juscia-ink">
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60vh] w-[80vw] animate-breathe rounded-full blur-[80px]"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, hsl(220 100% 43% / .14) 0%, hsl(220 100% 60% / .09) 40%, transparent 70%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 z-0 bg-[size:60px_60px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, hsl(220 100% 43% / .07) 1px, transparent 1px), linear-gradient(to bottom, hsl(220 100% 43% / .07) 1px, transparent 1px)",
-            maskImage: "linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent)",
-            WebkitMaskImage: "linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent)",
-          }}
-        />
-        <div
-          ref={giantRef}
-          className="pointer-events-none absolute bottom-[4vh] left-1/2 select-none whitespace-nowrap font-black leading-[0.75] tracking-[-0.05em] text-transparent"
-          style={{
-            transform: "translateX(-50%)",
-            fontSize: "13vw",
-            WebkitTextStroke: "1px hsl(220 100% 43% / .22)",
-            background: "linear-gradient(180deg, hsl(220 100% 43% / .28) 0%, hsl(220 100% 43% / .04) 70%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          JUSCIA
-        </div>
-
-        <div
-          className="absolute left-0 top-12 z-10 w-full overflow-hidden border-y border-juscia-primary/18 bg-juscia-primary/[0.06] py-4 shadow-[0_25px_50px_-12px_hsl(220_100%_43%_/_0.18)] backdrop-blur-md"
-          style={{ transform: "rotate(-2deg) scale(1.1)" }}
-        >
-          <div className="flex w-max animate-marquee-x-slow text-[13px] font-bold uppercase tracking-[0.3em] text-[hsl(220_60%_42%)]">
-            {marqueeItems.map((label, i) => (
-              <div key={i} className="flex items-center gap-12 px-6">
-                <span>{label}</span>
-                <span className="text-juscia-primary/60">✦</span>
+    <footer className="bg-secondary text-secondary-foreground border-t border-border/20">
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-primary-foreground" />
               </div>
-            ))}
+              <span className="text-2xl font-bold text-primary">Juscia</span>
+            </div>
+            <p className="text-secondary-foreground/70 mb-6 leading-relaxed">
+              Inteligência artificial para revolucionar o atendimento jurídico. 
+              Automatize, escale e converta mais.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="w-10 h-10 bg-secondary-foreground/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors">
+                <span className="sr-only">LinkedIn</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              <a href="#" className="w-10 h-10 bg-secondary-foreground/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors">
+                <span className="sr-only">Instagram</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
           </div>
+
+          {/* Links */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h3 className="font-bold mb-4 text-secondary-foreground">{category}</h3>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-secondary-foreground/70 hover:text-primary transition-colors"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="relative z-10 mx-auto mt-20 flex w-full max-w-4xl flex-1 flex-col items-center justify-center px-6">
-          <h2
-            ref={headingRef}
-            className="mb-12 text-center text-[52px] font-black leading-none tracking-[-0.045em] sm:text-[68px] md:text-[84px]"
-            style={{
-              background: "linear-gradient(180deg, hsl(220 100% 43%) 0%, hsl(220 100% 62%) 100%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              filter: "drop-shadow(0 6px 24px hsl(220 100% 43% / .35))",
-            }}
-          >
-            Pronto para começar?
-          </h2>
-          <div ref={linksRef} className="flex w-full flex-col items-center gap-6">
-            <div className="flex w-full flex-wrap justify-center gap-4">
-              {footerPrimary.map((p) => (
-                <MagneticLink
-                  key={p.label}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener"
-                  className={`${glassPill} inline-flex cursor-pointer items-center gap-3 rounded-full px-10 py-5 text-base font-bold text-juscia-primary`}
-                >
-                  <p.icon size={22} />
-                  {p.label}
-                </MagneticLink>
-              ))}
-            </div>
-            <div className="mt-2 flex w-full flex-wrap justify-center gap-3">
-              {footerSecondary.map((f) => (
-                <MagneticLink
-                  key={f.label}
-                  href={f.href}
-                  target="_blank"
-                  rel="noopener"
-                  className={`${glassPill} inline-flex cursor-pointer items-center rounded-full px-6 py-3 text-sm font-semibold text-[hsl(220_60%_40%)]`}
-                >
-                  {f.label}
-                </MagneticLink>
-              ))}
-            </div>
-            <div className="mt-1 flex flex-wrap justify-center gap-3">
-              {footerSocial.map((s) => (
-                <MagneticLink
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener"
-                  aria-label={s.label}
-                  className={`${glassPill} inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-juscia-primary`}
-                >
-                  <s.icon size={20} />
-                </MagneticLink>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-20 flex w-full flex-col items-center justify-between gap-6 px-6 pb-8 sm:flex-row sm:px-12">
-          <div className="text-xs font-semibold uppercase tracking-[0.1em] text-[hsl(220_30%_48%)]">
-            © 2026 Juscia. Todos os direitos reservados.
-          </div>
-          <div className={`${glassPill} flex cursor-default items-center gap-2.5 rounded-full px-6 py-3`}>
-            <span className="text-xs font-bold uppercase tracking-[0.1em] text-[hsl(220_40%_50%)]">
-              Fale com a gente
-            </span>
-            <a
-              href="https://api.whatsapp.com/send?phone=554892254344"
-              target="_blank"
-              rel="noopener"
-              className="text-sm font-extrabold text-juscia-primary"
-            >
-              (48) 9 9225-4344
+        <div className="border-t border-border/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-secondary-foreground/70 text-sm">
+            © 2024 Juscia. Todos os direitos reservados.
+          </p>
+          <div className="flex gap-6 text-sm">
+            <a href="#" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              Política de Privacidade
             </a>
-            <span className="text-juscia-primary/40">·</span>
-            <a href="mailto:contato@juscia.io" className="text-sm font-extrabold text-juscia-primary">
-              contato@juscia.io
+            <a href="#" className="text-secondary-foreground/70 hover:text-primary transition-colors">
+              Termos de Serviço
             </a>
           </div>
-          <MagneticButton
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            aria-label="Voltar ao topo"
-            className={`${glassPill} flex h-12 w-12 cursor-pointer items-center justify-center rounded-full p-0 text-juscia-primary`}
-          >
-            <ArrowUp size={20} />
-          </MagneticButton>
         </div>
-      </footer>
-    </section>
+      </div>
+    </footer>
   );
-}
+};
+
+export default Footer;
